@@ -4,7 +4,15 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon index.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "Magdalena Zielonka",
   "license": "MIT",
@@ -15,6 +23,7 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "jest": "^26.1.0"
   }
 }

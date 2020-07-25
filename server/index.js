@@ -7,9 +7,9 @@ const port = process.env.PORT || 5000;
 // app.use(express.static("./server"));
 
 // routes
-const chatsRoute = require("./server/routes/chats");
-const messagesRoute = require("./server/routes/messages");
-const userRoute = require("./server/routes/user");
+const chatsRoute = require("./routes/chats");
+const messagesRoute = require("./routes/messages");
+const userRoute = require("./routes/user");
 
 
 app.use(bodyParser.json());
