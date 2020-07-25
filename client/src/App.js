@@ -12,9 +12,9 @@ class App extends Component {
   };
   
   componentDidMount() {
-    this.callApi()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    // this.callApi()
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err));
   }
   
   callApi = async () => {
