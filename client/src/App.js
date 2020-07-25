@@ -1,78 +1,42 @@
-import React, { Component } from 'react';
-
-import logo from './logo.svg';
-
+import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { chatsRequested } from "./store/actions";
 import './App.css';
 
-class App extends Component {
-  state = {
-    response: '',
-    post: '',
-    responseToPost: '',
+const App = () => {
+  const dispatch = useDispatch();
+  const chats = useSelector(state => state.chats);
+
+  const handleClick = async () => {
+    dispatch(chatsRequested());
   };
-  
-  componentDidMount() {
-    // this.callApi()
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
-  }
-  
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    
-    return body;
-  };
-  
-  handleSubmit = async e => {
-    e.preventDefault();
-    const response = await fetch('/api/world', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.post }),
-    });
-    const body = await response.text();
-    
-    this.setState({ responseToPost: body });
-  };
-  
-render() {
+
+  const renderChats = () => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>Hello world!</h1>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{this.state.responseToPost}</p>
-      </div>
+      <table>
+        <tr>
+          <th>Chat Id</th>
+          <th>Messages Count</th>
+          <th>Users</th>
+        </tr>
+        {chats.map(chat => (
+          <tr>
+            <td>{chat.chat_uuid}</td>
+            <td>{chat.messages_count}</td>
+            <td>{chat.users}</td>
+          </tr>
+        ))}
+      </table>
     );
   }
+  
+  return (
+    <div className="App">
+      <h1>Click this button to fetch Chats info</h1>
+      <button onClick={handleClick}>Get chats</button>
+      {chats && renderChats()}
+    </div>
+  );
 }
 
 export default App;
