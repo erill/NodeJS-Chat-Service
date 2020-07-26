@@ -1,9 +1,28 @@
-import { CHATS_FETCHED } from "./actions";
+import { CHATS_FETCH_SUCCESS, CHATS_FETCH_FAILED } from "./actions";
 
-const reducer = (state = { chats: null }, action) => {
+const initialState = {
+  chats: {
+    data: null,
+    failure: null,
+  }  
+}
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case CHATS_FETCHED:
-      return { chats: [...action.payload] };
+    case CHATS_FETCH_SUCCESS:
+      return { 
+        chats: {
+          data: [...action.payload],
+          failure: false,
+        } 
+      };
+    case CHATS_FETCH_FAILED:
+      return { 
+        chats: {
+          data: null,
+          failure: true,
+        } 
+      };
     default:
       return state;
   }
