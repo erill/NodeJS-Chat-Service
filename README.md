@@ -8,6 +8,9 @@ Those are:
 - API unit tests - focus more on different scenarios
 - NodeJS babel configuration 
 
+# Required
+
+Installed node version v14.6.0 or higher
 
 ### Installing
 ## NodeJS Service
