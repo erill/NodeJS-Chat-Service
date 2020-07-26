@@ -1,4 +1,3 @@
 module.exports = {
-  "testRegex": "((\\.|/*.)(spec))\\.js?$",
-  "verbose": false
+  "testRegex": "((\\.|/*.)(spec))\\.js?$"
 }

@@ -1,5 +1,6 @@
 import supertest from "supertest";
 import { createServer } from "./../createServer.js";
+import { messages } from "./../controllers/mockedData.js";
 
 describe("GET /messages", () => {
   let app;
@@ -17,6 +18,6 @@ describe("GET /messages", () => {
     const { body, status } = await supertest(app).get("/messages");
 
     expect(status).toEqual(200);
-    expect(body).not.toBeUndefined();
+    expect(body).toEqual(messages);
   });
 });

@@ -18,20 +18,19 @@ describe("GET /user/:id", () => {
 
     it("should return user object if user id matches", async () => {
       const { body, status } = await supertest(app).get(`/user/${userId}`);
-      const { first_name, last_name, user_uuid } = body;
 
       expect(status).toEqual(200);
-      expect(body).not.toBeUndefined();
-      expect(user_uuid).toEqual(userId);
-      expect(first_name).not.toBeUndefined();
-      expect(last_name).not.toBeUndefined();
+      expect(body).toEqual({
+        user_uuid: userId,
+        first_name: "John",
+        last_name: "Doe"
+      })
     });
 
     it("should return 404 status code if user id dont match", async () => {
       const { body, status } = await supertest(app).get(`/user/${incorrectUserId}`);
 
       expect(status).toEqual(404);
-      expect(body).not.toBeUndefined();
       expect(body.message).toEqual("User not found");
       });
   });

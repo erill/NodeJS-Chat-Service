@@ -2,9 +2,7 @@
   "name": "chats",
   "version": "1.0.0",
   "scripts": {
-    "client": "cd client && yarn start",
     "server": "nodemon index.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "test": "jest --config ./jest.config.cjs",
     "test:watch": "npm run test -- --watch"
   },
@@ -20,16 +18,13 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.17.1",
-    "nedb": "^1.8.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "babel-jest": "^26.1.0",
-    "concurrently": "^4.0.1",
     "jest": "^26.1.0",
-    "nock": "^13.0.2",
     "supertest": "^4.0.2"
   }
 }

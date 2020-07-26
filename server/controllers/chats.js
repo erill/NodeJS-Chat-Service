@@ -16,13 +16,14 @@ class ChatsController {
       .then(response_users => {
         const result = chats.map(chat => {
           let users_list = [];
-          
-          for(let user_uuid of chat.chat_authors) {
-            const user = response_users.find(user => user.user_uuid === user_uuid);
+          for (let user_uuid of chat.chat_authors) {
+            const user = response_users.find(user => user.user_uuid == user_uuid);
+
             users_list = [
               ...users_list,
               user ? `${user.first_name} ${user.last_name}` : "Anonymous"
             ];
+
           }
 
           return {

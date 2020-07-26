@@ -2,7 +2,7 @@ export const getChatsAndAuthors = (messages) => {
   let chats = [];
   let unique_authors_uuids = new Set();
 
-  messages && messages.forEach(message => {
+  messages && messages.length > 0 && messages.forEach(message => {
     const index = chats.findIndex(item => item.chat_uuid === message.chat_uuid);
     unique_authors_uuids.add(message.author_uuid);
     
