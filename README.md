@@ -2,7 +2,7 @@
 
 Simple NodeJS chat service with React client app.
 
-Given that this is my first NodeJS application in life and I'm full frontend developer at the moment, there are some things I would like to improve in this app in the future.
+Given that this is my first NodeJS application in life and I'm full frontend developer at the moment, there are some things that could be improved.
 Those are:
 - SQL command in ChatsController.js file to get all needed information by single query
 - API unit tests - focus more on different scenarios
