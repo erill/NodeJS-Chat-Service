@@ -1,16 +1,16 @@
-const request = require("supertest");
-const { app } = require("./../index");
+import request from "supertest";
+import { app } from "./../index";
 
-const scope = nock('http://localhost:5000')
-  .get('/messages')
-  .reply(200, { 
-    body: [{
-      message_uuid: "3b777c22-5f7d-4552-8294-7363c68f6682",
-      chat_uuid: "802e9b88-60f2-43a1-b8b9-bad33afb0f7b",
-      author_uuid: "ba405586-3a7f-484b-b5c0-5d1cf5cd9c0e",
-      text: "Hi!"
-    }]
-  });
+// const scope = nock('http://localhost:5000')
+//   .get('/messages')
+//   .reply(200, { 
+//     body: [{
+//       message_uuid: "3b777c22-5f7d-4552-8294-7363c68f6682",
+//       chat_uuid: "802e9b88-60f2-43a1-b8b9-bad33afb0f7b",
+//       author_uuid: "ba405586-3a7f-484b-b5c0-5d1cf5cd9c0e",
+//       text: "Hi!"
+//     }]
+//   });
   
 
 // jest.mock("./../helpers/fetchData", () => ({

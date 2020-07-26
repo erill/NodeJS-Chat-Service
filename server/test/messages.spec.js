@@ -1,14 +1,22 @@
-const request = require("supertest");
-const { app } = require("./../index");
+import supertest from "supertest";
+import { createServer } from "./../createServer.js";
 
 describe("GET /messages", () => {
-  it("should get list of all messages", () => {
-    request(app)
-      .get('/messages')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .then(response => {
-        expect(response).not.toBeUndefined();
-      });
+  let app;
+  
+  beforeAll(() => {
+    app = createServer();
+  });
+  
+  afterAll(() => {
+    app.close();
+  });
+
+
+  it("should get list of all messages", async () => {
+    const { body, status } = await supertest(app).get("/messages");
+
+    expect(status).toEqual(200);
+    expect(body).not.toBeUndefined();
   });
 });

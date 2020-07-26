@@ -7,7 +7,7 @@ const App = () => {
   const dispatch = useDispatch();
   const chats = useSelector(state => state.chats);
 
-  const handleClick = async () => {
+  const handleClick = () => {
     dispatch(chatsRequested());
   };
 
