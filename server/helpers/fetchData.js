@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
-const fetchData = async (url) => {
+export const fetchData = async (url) => {
   try {
     const response = await fetch(url);
     const json = await response.json();
@@ -9,5 +9,3 @@ const fetchData = async (url) => {
     return error;
   }
 };
-
-module.exports.fetchData = fetchData;

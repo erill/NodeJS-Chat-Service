@@ -1,23 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import express from "express";
+import bodyParser from "body-parser";
+import routes from "./routes/index.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// app.use(express.static("./server"));
-
-// routes
-const chatsRoute = require("./routes/chats");
-const messagesRoute = require("./routes/messages");
-const userRoute = require("./routes/user");
-
+app.use("/", routes);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// if (!module.parent){ 
+//   app.listen(port); 
+// }
 
-app.use("/chats", chatsRoute);
-app.use("/messages", messagesRoute);
-app.use("/user/:id", userRoute);
-
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port);
+export default app;
