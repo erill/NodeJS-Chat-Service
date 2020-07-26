@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import { createServer } from "./../createServer.js";
-import { messages } from "./../controllers/mockedData.js";
+import { messages } from "../helpers/mockedData.js";
 
 describe("GET /messages", () => {
   let app;

@@ -1,11 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { chatsFetchRequest } from "./store/actions";
+import { getChats } from "./store/selectors";
+
 import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();
-  const chats = useSelector(state => state.chats);
+  const chats = useSelector(getChats);
 
   const handleClick = () => {
     dispatch(chatsFetchRequest());

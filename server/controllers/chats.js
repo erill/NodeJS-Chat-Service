@@ -1,42 +1,53 @@
-import { fetchData } from "./../helpers/fetchData.js";
-import { getChatsAndAuthors } from "./../helpers/getChatsAndAuthors.js";
+import database from "./../createDatabase.js";
 
 class ChatsController {
   static async getAllChats (req, res) {
-    const messages = await fetchData("http://localhost:5000/messages");
-    const { chats, unique_authors_uuids } = getChatsAndAuthors(messages);
+    const sql = `SELECT m.chat_uuid, m.message_uuid, u.user_uuid, u.first_name || ' ' || u.last_name as user
+      FROM message AS m 
+      LEFT JOIN user as u 
+      ON u.user_uuid = m.author_uuid`;
 
-    // Get user names
-    let promises = [];
-    for(let id of unique_authors_uuids) {
-      promises = [...promises, fetchData(`http://localhost:5000/user/${id}`)];
-    }
+    database.all(sql, [], (error, rows) => {
+      if (error) {
+        return res.status(400).json({ message: error.message });
+      } 
+      let formattedChats = [];
 
-    Promise.all(promises)
-      .then(response_users => {
-        const result = chats.map(chat => {
-          let users_list = [];
-          for (let user_uuid of chat.chat_authors) {
-            const user = response_users.find(user => user.user_uuid == user_uuid);
-
-            users_list = [
-              ...users_list,
-              user ? `${user.first_name} ${user.last_name}` : "Anonymous"
-            ];
-
+      rows.forEach(row => {
+        const index = formattedChats.findIndex(item => item.chat_uuid === row.chat_uuid);        
+        if(index === -1) {
+          formattedChats = [
+            ...formattedChats, 
+            {
+              chat_uuid: row.chat_uuid,
+              chat_messages: new Set().add(row.message_uuid),
+              users: new Set().add(row.user_uuid),
+            }
+          ];
+        } else {
+          const { chat_uuid, chat_messages, users } = formattedChats[index];
+          formattedChats[index] = {
+            chat_uuid,
+            chat_messages: chat_messages.add(row.message_uuid),
+            users: users.add(row.user_uuid),
           }
+        }
+      });
 
-          return {
-            chat_uuid: chat.chat_uuid,
-            messages_count: chat.chat_messages.size,
-            users: users_list, 
-          }
-        });
+      const result = formattedChats.map(chat => {
+        const users = Array.from(chat.users).map(userId => (
+          userId ? rows.find(row => row.user_uuid === userId).user : "Anonymous"
+        ));
 
-        return res.status(200).json(result);
+        return ({
+          chat_uuid: chat.chat_uuid,
+          messages_count: chat.chat_messages.size,
+          users,
+        })
+      });
 
-      })
-      .catch(error => res.json(error));
+      return res.status(200).json(result);
+    });
   }
 }
 
