@@ -2,48 +2,46 @@
 
 Simple NodeJS chat service with React client app.
 
-## NodeJS Service
+Given that this is my first NodeJS application in life and I'm full frontend developer at the moment, there are some things I would like to improve in this app in the future.
+Those are:
+- SQL command in ChatsController.js file to get all needed information by single query
+- API unit tests - focus more on different scenarios
+- NodeJS babel configuration 
 
-NodeJS service to combine chats informations based on user and messages data.
 
 ### Installing
-
+## NodeJS Service
 ```
 cd server
 npm install
 npm run server
 ```
 
-### Running the API tests
-
-```
-cd server
-npm run test
-```
-
 ## React Client application 
-
-Simple RCA based application to store and display chats information fetched from chat service.
-
-### Installing
-
+Simple React application to store and display "/chats" resulst fetched from service.
 ```
 cd client
 npm install
 npm run start
 ```
 
+### Running the API tests
+```
+cd server
+npm run test
+```
 
-## Running client app with NodeJS service
 
-To run backend service open terminal window and run below commands"
+### Running client app with NodeJS service
+
+To run backend service open terminal window and run below commands
 
 ```
 cd server
 npm run server
 ```
 
-To run client application open second terminal window and run below commands"
+To run client application open second terminal window and run below commands
 
 ```
 cd client
