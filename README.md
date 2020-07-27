@@ -7,6 +7,7 @@ Those are:
 - SQL command in ChatsController.js file to get all needed information by single query
 - API unit tests - focus more on different scenarios
 - NodeJS babel configuration 
+- introduce Typescript
 
 # Required
 
